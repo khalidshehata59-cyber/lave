@@ -4,146 +4,185 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>عيد ميلاد أغلى ملوكا</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         :root {
-            --pink-light: #ffe5ec;
-            --pink-medium: #ffb7c5;
-            --pink-dark: #ff4d6d;
+            --maroon: #800000;
+            --maroon-dark: #5c0000;
+            --brown: #4e342e;
             --white: #ffffff;
+            --cream: #fdfaf6;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: var(--pink-light);
+            background-color: var(--cream);
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             overflow-x: hidden;
+            color: var(--brown);
         }
 
-        /* واجهة القفل */
+        /* شاشة القفل */
         #login-screen {
             background: var(--white);
             padding: 40px;
             border-radius: 30px;
-            box-shadow: 0 15px 35px rgba(255, 77, 109, 0.2);
+            box-shadow: 0 15px 35px rgba(128, 0, 0, 0.15);
             text-align: center;
             width: 85%;
             max-width: 400px;
-            border: 3px solid var(--pink-medium);
+            border: 2px solid var(--maroon);
             z-index: 100;
         }
 
         input[type="password"] {
-            width: 80%;
-            padding: 12px;
-            border: 2px solid var(--pink-medium);
+            width: 85%;
+            padding: 15px;
+            border: 2px solid #eee;
             border-radius: 15px;
             text-align: center;
             margin-bottom: 15px;
             outline: none;
+            font-size: 1rem;
         }
 
         .login-btn {
-            background-color: var(--pink-dark);
+            background-color: var(--maroon);
             color: white;
             border: none;
-            padding: 12px 30px;
+            padding: 12px 40px;
             border-radius: 15px;
             cursor: pointer;
             font-size: 1.1rem;
+            transition: 0.3s;
         }
 
         /* واجهة المحتوى */
         #main-content {
             display: none;
             width: 100%;
-            background: linear-gradient(to bottom, var(--pink-light), var(--white));
+            background: linear-gradient(to bottom, #ffffff, #fdfaf6);
             min-height: 100vh;
             text-align: center;
             padding-bottom: 50px;
+            animation: fadeIn 1s ease-in;
         }
 
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
         .name-title {
-            font-size: 2.8rem;
-            color: var(--pink-dark);
-            margin-top: 30px;
+            font-size: 2.5rem;
+            color: var(--maroon);
+            margin-top: 20px;
             animation: pulse 2s infinite;
         }
 
-        /* شريط الصور الجانبي */
+        /* تصميم العداد التنازلي */
+        .countdown-box {
+            background: var(--white);
+            margin: 20px auto;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(128, 0, 0, 0.05);
+            border: 1px solid #efebe9;
+        }
+
+        .timer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .timer-item {
+            background: var(--maroon);
+            color: white;
+            padding: 10px 5px;
+            border-radius: 12px;
+        }
+
+        .timer-num {
+            font-size: 1.5rem;
+            font-weight: bold;
+            display: block;
+        }
+
+        .timer-label {
+            font-size: 0.7rem;
+            opacity: 0.9;
+        }
+
+        /* صندوق الرسالة الرومانسية */
+        .love-msg {
+            max-width: 85%;
+            margin: 25px auto;
+            padding: 30px;
+            background: #fff;
+            border-radius: 20px;
+            line-height: 2;
+            font-size: 1.15rem;
+            border-right: 8px solid var(--maroon);
+            box-shadow: 0 10px 30px rgba(128, 0, 0, 0.05);
+            text-align: justify;
+            color: #333;
+        }
+
         .slider {
             display: flex;
             overflow-x: auto;
-            scroll-snap-type: x mandatory;
             gap: 15px;
             padding: 20px;
             scrollbar-width: none;
         }
 
-        .slider::-webkit-scrollbar {
-            display: none;
-        }
+        .slider::-webkit-scrollbar { display: none; }
 
         .slider img {
             flex-shrink: 0;
-            width: 80%;
-            max-width: 300px;
-            height: 400px;
+            width: 250px;
+            height: 350px;
             object-fit: cover;
             border-radius: 20px;
             border: 5px solid white;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-            scroll-snap-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
 
         .section-title {
-            color: var(--pink-dark);
-            margin-top: 30px;
+            color: var(--maroon);
+            margin-top: 40px;
             font-size: 1.5rem;
-            border-bottom: 2px solid var(--pink-medium);
+            border-bottom: 2px solid #eee;
             display: inline-block;
             padding-bottom: 5px;
         }
 
-        /* حاوية اليوتيوب المعدلة */
         .video-container {
             position: relative;
-            padding-bottom: 56.25%; /* نسبة 16:9 */
+            padding-bottom: 56.25%;
             height: 0;
-            overflow: hidden;
             max-width: 90%;
             margin: 20px auto;
             border-radius: 20px;
+            overflow: hidden;
             border: 5px solid white;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
         }
 
         .video-container iframe {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-
-        .love-msg {
-            max-width: 600px;
-            margin: 20px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 15px;
-            line-height: 1.6;
-            font-size: 1.1rem;
+            top: 0; left: 0; width: 100%; height: 100%;
         }
 
         @keyframes pulse {
             0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            50% { transform: scale(1.02); }
             100% { transform: scale(1); }
         }
     </style>
@@ -151,72 +190,113 @@
 <body>
 
     <div id="login-screen">
-        <h2 style="color: var(--pink-dark);">أهلاً ي ملوكا 🌸</h2>
-        <p>اكتبي رمز الدخول عشان تشوفي مفاجأتك</p>
-        <input type="password" id="passInput" placeholder="اكتبي تاريخ ميلادك هنا...">
+        <h2 style="color: var(--maroon);">نورتي ي ملوكا 🌚♥️</h2>
+        <p>اكتبي الباسورد عشان تشوفي المفاجأة</p>
+        <input type="password" id="passInput" placeholder="اكتبي تاريخ ميلادك 🫶🏻 ..." onkeypress="handleKeyPress(event)">
         <br>
         <button class="login-btn" onclick="checkPass()">افتحي الهدية ✨</button>
-        <p id="error-msg" style="color:red; display:none; font-weight: bold; margin-top: 10px;"></p>
+        <p id="error-msg" style="color:red; display:none; margin-top: 15px;"></p>
     </div>
 
     <div id="main-content">
         <h1 class="name-title">Maloukty ❤️</h1>
+
+        <div class="countdown-box">
+            <p style="margin: 0 0 10px 0; font-weight: bold; color: var(--brown);">الوقت المتبقي ليوم ميلادك السعيد: 🎂</p>
+            <div class="timer-grid">
+                <div class="timer-item"><span id="days" class="timer-num">00</span><span class="timer-label">يوم</span></div>
+                <div class="timer-item"><span id="hours" class="timer-num">00</span><span class="timer-label">ساعة</span></div>
+                <div class="timer-item"><span id="minutes" class="timer-num">00</span><span class="timer-label">دقيقة</span></div>
+                <div class="timer-item"><span id="seconds" class="timer-num">00</span><span class="timer-label">ثانية</span></div>
+            </div>
+        </div>
         
         <div class="love-msg">
-            ي ملوكا النهاردة مش بس عيد ميلادك ، النهاردة عيد ميلاد ضحكتي و فرحتي ، كل سنه وانتي منوره حياتي و دنيتي ، كل سنه واحنا مع بعض ، كل سنه و حبي ليكي بيزيد اكتر واكتر بحبييييييييك ي لوكاااااا🫶🏻♥️♥️♥️♥️♥️
+            إلى ملوكتي وأغلى ما أملك.. 
+            <br><br>
+            النهاردة مش مجرد يوم في السنة، ولا مجرد رقم في النتيجة، النهاردة اليوم اللي الشمس فيه نورت دنيتي بجد. لو سألوني عن أحلى حاجة حصلت في حياتي، هقول "انتي". انتي اللي بضحكتك بتدوبي أي تعب، وبكلامك بتخلي الدنيا في عيني أحلى بكتير.
+            <br><br>
+            العداد اللي فوق ده مش بس بيحسب ثواني ودقايق لعيد ميلادك، ده بيحسب كل لحظة قلبي بيدق فيها باسمك. شكراً ليكي على كل لحظة حلوة، شكراً إنك موجودة في حياتي، وشكراً إنك الشخص اللي بختار كل يوم إني أكمل معاه طريقي وأشارك معاك كل تفاصيل يومي.
+            <br><br>
+            كل سنة وأنتي ملكة قلبي، كل سنة وأنتي منورة دنيتي بوجودك، وكل سنة وإحنا مع بعض، بنكبر سوا، وبنحلم سوا، وبنحب بعض أكتر وأكتر. يوم 21/2 هو عيدي أنا، عشان اليوم ده هو اللي جابلي أغلى هدية في الكون.
+            <br><br>
+            بحبك يا ملوكا، وهفضل أحبك لآخر ثانية في العمر. 🫶🏻♥️
         </div>
 
-        <h3 class="section-title">ذكرة حلوة 📸</h3>
-        <p style="font-size: 0.9rem; color: #888;">(قلبي الصور لليمين والشمال)</p>
-        
+        <h3 class="section-title">ذكرى حلوة 📸</h3>
         <div class="slider">
-            <img src="https://i.postimg.cc/d1ZDvtnx/IMG_20251229_181143.jpg" alt="صورة 1">
-            <img src="https://i.postimg.cc/CMDdQ5RB/IMG_20251229_181130.jpg" alt="صورة 2">
-            <img src="https://i.postimg.cc/c1Y6bCvr/IMG_20251229_181112.jpg" alt="صورة 3">
-            <img src="https://i.postimg.cc/BZDtVbjF/IMG_20251229_181057.jpg" alt="صورة 4">
-            <img src="https://i.postimg.cc/BZDtVbjx/IMG_20251229_181040.jpg" alt="صورة 5">
+            <img src="https://i.postimg.cc/DfSPCF4p/IMG_20260204_WA0010.jpg">
+            <img src="https://i.postimg.cc/FFYVPmkL/IMG_20260204_WA0009.jpg">
+            <img src="https://i.postimg.cc/HWr9SH8P/IMG_20260204_WA0008.jpg">
+            <img src="https://i.postimg.cc/nVXGdZ9P/IMG_20260204_WA0007.jpg">
+            <img src="https://i.postimg.cc/G34xMrTZ/IMG_20260204_WA0006.jpg">
         </div>
 
-        <h3 class="section-title">فيديو خاص ليكي ي ملوكا 🎥</h3>
+        <h3 class="section-title">فيديو خاص ليكي 🎥</h3>
         <div class="video-container">
-            <iframe
-            id="ytVideo"
-            src="https://www.youtube.com/embed/QHMMsiT6HRY"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="ytVideo" src="" frameborder="0" allowfullscreen></iframe>
         </div>
 
-<div style="margin-top: 20px;">
-    <p>أغنية عيد ميلادك 🎵</p>
-<div class="video-container">
-    <iframe
-    src="https://www.youtube.com/embed/EKSgWM11B3k" frameborder="0" allowfullscreen></iframe>
-</div>
+        <h3 class="section-title">أغنية عيد ميلادك 🎵</h3>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/EKSgWM11B3k" frameborder="0" allowfullscreen></iframe>
+        </div>
 
-</div>
-
-
-        <p style="padding: 40px; font-weight: bold; color: var(--pink-dark);">ملوكتي🫶🏻♥️♥️♥️</p>
+        <p style="padding: 40px; font-weight: bold; color: var(--maroon); font-size: 1.2rem;">ملوكتي للأبد 🫶🏻♥️</p>
+        <p style="font-size: 0.8rem; color: #888; margin-top: -20px;">(صنعت بكل حب خصيصاً لملوكا)</p>
     </div>
 
     <script>
+        function updateCountdown() {
+            const now = new Date();
+            let year = now.getFullYear();
+            let target = new Date(year, 1, 21); // 21 Feb
+
+            if (now > target) {
+                target = new Date(year + 1, 1, 21);
+            }
+
+            const diff = target - now;
+            
+            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+            document.getElementById('days').innerText = d.toString().padStart(2, '0');
+            document.getElementById('hours').innerText = h.toString().padStart(2, '0');
+            document.getElementById('minutes').innerText = m.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = s.toString().padStart(2, '0');
+        }
+
+        setInterval(updateCountdown, 1000);
+
+        function handleKeyPress(e) {
+            if (e.key === 'Enter') checkPass();
+        }
+
         function checkPass() {
             const userPass = document.getElementById('passInput').value;
-            const errorElement = document.getElementById('error-msg');
-            
             if (userPass === "21/2") {
                 document.getElementById('login-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
-                
-                // تفعيل لينك اليوتيوب عند الدخول
-                document.getElementById('ytVideo').src = "https://www.youtube.com/embed/QHMMsiT6HRY";
-                
-                document.getElementById('birthdaySong').play();
+                updateCountdown();
+                launchHearts();
+                document.getElementById('ytVideo').src = "https://www.youtube.com/embed/QHMMsiT6HRY?autoplay=1";
             } else {
-                errorElement.innerText = "الباسورد غلط ي ملوكا.. جربي تاني ي سكر! ❤️";
-                errorElement.style.display = 'block';
-                document.getElementById('passInput').value = "";
+                const err = document.getElementById('error-msg');
+                err.innerText = "الباسورد غلط ي ملوكا.. جربي تاني ي سكر ❤️";
+                err.style.display = 'block';
             }
+        }
+
+        function launchHearts() {
+            var end = Date.now() + (4 * 1000);
+            (function frame() {
+                confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0 }, colors: ['#800000', '#4e342e'] });
+                confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1 }, colors: ['#800000', '#4e342e'] });
+                if (Date.now() < end) requestAnimationFrame(frame);
+            }());
         }
     </script>
 </body>
