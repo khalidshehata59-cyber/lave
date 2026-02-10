@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إلى ياسو نور عيني ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #5d0312;
+            --glass: rgba(255, 255, 255, 0.12);
+            --accent: #ff2d55;
+        }
+
+        body {
+    margin: 0; 
+    /* خلفية نبيتية مع قلب موف متوهج في المنتصف */
+    background: radial-gradient(circle, rgba(147, 51, 234, 0.4) 0%, #5d0312 70%);
+    color: white;
+    font-family: 'Cairo', sans-serif;
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    min-height: 100vh; 
+    overflow: hidden;
+}
+
+
+        .heart-fall {
+            position: fixed; top: -10%; color: rgba(255,255,255,0.3);
+            font-size: 20px; user-select: none; z-index: 1;
+            animation: fall linear forwards;
+        }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); } }
+
+        .container {
+            width: 88%; max-width: 370px;
+            background: var(--glass); backdrop-filter: blur(20px);
+            border-radius: 35px; padding: 30px 20px;
+            text-align: center; border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            display: none; z-index: 10; position: relative;
+        }
+
+        .active { display: block; animation: fadeIn 0.6s ease; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .typewriter {
+            font-size: 17px; font-weight: 600; line-height: 2.2;
+            text-align: center; white-space: pre-wrap;
+            padding: 0 10px; margin-bottom: 20px; color: #fdfdfd;
+        }
+
+        .glow-text {
+            font-size: 28px; font-weight: 800; display: block;
+            margin: 15px 0; animation: glowAnimation 1.5s infinite alternate;
+        }
+
+        .final-love {
+            font-size: 45px; font-weight: 800; display: block;
+            margin-top: 20px; color: #ffcad4; text-shadow: 0 0 15px rgba(255, 202, 212, 0.5);
+        }
+
+        @keyframes glowAnimation {
+            0% { color: #ffffff; text-shadow: 0 0 10px #fff; }
+            100% { color: #ffeb3b; text-shadow: 0 0 20px #ffeb3b, 0 0 30px #ffeb3b; }
+        }
+
+        .media-box { width: 100%; border-radius: 20px; border: 1.5px solid #fff; margin-bottom: 15px; overflow: hidden; position: relative; }
+        .slider-wrapper { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+        .slider-wrapper img { min-width: 100%; height: 240px; object-fit: cover; }
+        
+        .timer-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 15px 0; }
+        .t-item { background: rgba(0,0,0,0.3); padding: 8px 0; border-radius: 12px; border: 1px solid rgba(255,255,255,0.3); }
+        .t-item span { display: block; font-size: 18px; font-weight: 800; }
+
+        input { width: 80%; padding: 12px; border-radius: 20px; border: none; text-align: center; outline: none; color: #333; }
+        .btn { background: var(--accent); color: white; border: none; padding: 12px; border-radius: 25px; width: 100%; font-weight: 800; cursor: pointer; margin-top: 15px; }
+        .hidden-btn { display: none; }
+    </style>
+</head>
+<body>
+
+<div class="container active" id="ui1">
+    <div style="font-size: 50px; margin-bottom: 10px;">🔐</div>
+    <h2 style="margin-top: 0;">ادخلي الباسورد ي سمسمه</h2>
+    <input type="text" id="passInput" placeholder="اكتبي الباسورد ي قلبي ...">
+    <div id="error-msg" style="display:none; color:#ff4d4d; margin-top:10px;">الباسورد غلط ي سو😒! ❌</div>
+    <button class="btn" onclick="checkPass()">Unlock ❤️</button>
+</div>
+
+<div class="container" id="ui2">
+    <h2 style="color: #ffcad4; font-size: 28px;">سوو نور عيني 💕</h2>
+    <div class="typewriter" id="text1"></div>
+    <button class="btn hidden-btn" id="btn1" onclick="toStep3()">شوفي اللي بعده ➔</button>
+</div>
+
+<div class="container" id="ui3" style="max-height: 90vh; overflow-y: auto;">
+    <h2 style="font-size: 22px;">أحلى ذكره ❤️</h2>
+    
+    <p style="margin: 10px 0 5px; font-weight: bold; font-size: 15px;">شغلي الفيديو ▶️</p>
+    <div class="media-box">
+        <iframe 
+            width="100%" 
+            height="240" 
+            src="https://www.youtube.com/embed/eYvfsXqAwYM?autoplay=1&mute=0" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            allowfullscreen>
+        </iframe>
+    </div>
+
+    <p style="margin: 15px 0 5px; font-weight: bold; font-size: 15px;">قلبي يمين وشمال ↔️📸</p>
+    <div class="media-box">
+        <div class="slider-wrapper">
+            <img src="https://i.postimg.cc/d3cgnsLy/IMG_20260210_WA0001.jpg">
+            <img src="https://i.postimg.cc/762pgGYz/IMG_20260210_WA0013.jpg">
+            <img src="https://i.postimg.cc/hvRNMDf8/IMG_20260210_WA0004.jpg">
+            <img src="https://i.postimg.cc/W3kQMFbq/IMG_20260210_WA0017.jpg">
+            <img src="https://i.postimg.cc/FzXwGr7n/IMG_20260210_WA0011.jpg">
+            <img src="https://i.postimg.cc/fL96xtTX/IMG_20260210_WA0018.jpg">
+            <img src="https://i.postimg.cc/T1vBQdpL/IMG_20260210_WA0002.jpg">
+            <img src="https://i.postimg.cc/KzMdnkvM/IMG_20260210_WA0016.jpg">
+            <img src="https://i.postimg.cc/WzcxSNhX/IMG_20260210_WA0009.jpg">
+            <img src="https://i.postimg.cc/J0CSKrGJ/IMG_20260210_WA0012.jpg">
+        </div>
+    </div>
+    
+    <p style="margin: 15px 0 5px; font-weight: bold; font-size: 15px;">أيام عايشينها سوا ⏳❤️</p>
+    <div class="timer-grid">
+        <div class="t-item"><span id="d">0</span><small>يوم</small></div>
+        <div class="t-item"><span id="h">0</span><small>ساعة</small></div>
+        <div class="t-item"><span id="m">0</span><small>دقيقة</small></div>
+        <div class="t-item"><span id="s">0</span><small>ثانية</small></div>
+    </div>
+    <button class="btn" onclick="toStep4()">آخر حاجة ➔</button>
+</div>
+
+<div class="container" id="ui4">
+    <div class="typewriter" id="text2"></div>
+    <button class="btn hidden-btn" id="btn2" onclick="location.reload()">أحبك للأبد 🔄</button>
+</div>
+
+<script>
+    const msg1 = "ي ياسمين.. ي أجمل حاجة حصلتلي\nفي الدنيا دي ❤️\nمن أول يوم شوفتك فيه\nوأنا حبيتك من كل قلبي..\n<span class='glow-text'>كل عيد حب واحنا ديما سوا..</span>\nكل لحظة بقضيها معاكي\nبتبقى ذكرى محفورة ف قلبي.";
+    const msg2 = "كل عيد وأنتِ منورة حياتي ي سووو ❤️\n\nمهما هقولك بحبك إزاي\nمش هوفيكي حقك..\n\n<span class='final-love'>بحبك ي سمسمتيي 💕</span>";
+
+    function checkPass() {
+        const inp = document.getElementById('passInput').value.toLowerCase().trim();
+        if(inp === "love") { showStep('ui2'); startType('text1', msg1, 'btn1'); createHearts(); }
+        else { document.getElementById('error-msg').style.display = 'block'; }
+    }
+
+    function toStep3() { showStep('ui3'); startTimer(); }
+    function toStep4() { showStep('ui4'); startType('text2', msg2, 'btn2'); }
+
+    function showStep(id) {
+        document.querySelectorAll('.container').forEach(c => c.style.display = 'none');
+        document.getElementById(id).style.display = 'block';
+    }
+
+    function startType(id, text, btnId) {
+        let i = 0; const el = document.getElementById(id); el.innerHTML = "";
+        const timer = setInterval(() => {
+            if (text.charAt(i) === '<') {
+                let endTag = text.indexOf('>', i);
+                el.innerHTML += text.substring(i, endTag + 1); i = endTag + 1;
+            } else { el.innerHTML += text.charAt(i); i++; }
+            if(i >= text.length) { clearInterval(timer); document.getElementById(btnId).style.display = 'block'; }
+        }, 50);
+    }
+
+    function startTimer() {
+        const start = new Date("2025-08-03T00:00:00").getTime();
+        setInterval(() => {
+            const diff = new Date().getTime() - start;
+            document.getElementById('d').innerText = Math.floor(diff / 86400000);
+            document.getElementById('h').innerText = Math.floor((diff % 86400000) / 3600000);
+            document.getElementById('m').innerText = Math.floor((diff % 3600000) / 60000);
+            document.getElementById('s').innerText = Math.floor((diff % 60000) / 1000);
+        }, 1000);
+    }
+
+    function createHearts() {
+        setInterval(() => {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-fall');
+            heart.innerHTML = "❤️";
+            heart.style.left = Math.random() * 100 + "vw";
+            heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }, 400);
+    }
+</script>
+</body>
+</html>
